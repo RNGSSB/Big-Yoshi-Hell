@@ -12,6 +12,8 @@ public class GameUI : MonoBehaviour
     public int health;
     public int numberofmissiles;
     public Text bruh;
+    public Text Score;
+    int scoreUi;
     
     void Start()
     {
@@ -21,9 +23,10 @@ public class GameUI : MonoBehaviour
     
     void Update()
     {
-        health = GameObject.Find("player").GetComponent<PlayerControls>().health;
-        numberofmissiles = GameObject.Find("player").GetComponent<PlayerControls>().missiles;
+        health = GameObject.Find("Player").GetComponent<PlayerControls>().health;
+        numberofmissiles = GameObject.Find("Player").GetComponent<PlayerControls>().missiles;
         bruh.text = numberofmissiles.ToString();
+        Score.text = "Score: " + FindObjectOfType<GameManager>().score.ToString();
         if (health == 1)
         {
             heart1.enabled = true;

@@ -14,7 +14,7 @@ public class Rat : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = -transform.up * speed;
+        //rb.velocity = -transform.up * speed;
     }
 
     // Update is called once per frame

@@ -7,7 +7,6 @@ public class PlayerControls : MonoBehaviour
 {
     
     public Transform point;
-    public Transform bruh;
     public Transform missilepoint;
     public GameObject bullet;
     public GameObject missile;
@@ -67,16 +66,6 @@ public class PlayerControls : MonoBehaviour
         
     }
 
-    void FixedUpdate()
-    {
-
-
-
-        
-
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -113,7 +102,7 @@ public class PlayerControls : MonoBehaviour
             }
             if (explosionumber == 1)
             {
-                Instantiate(explosion, bruh.position, bruh.rotation);
+                Instantiate(explosion, transform.position, transform.rotation);
                 explosionumber--;
                 
             }
@@ -235,23 +224,23 @@ public class PlayerControls : MonoBehaviour
 
         
     }
-    void OnCollisionEnter2D(Collision2D bruh)
+    void OnCollisionEnter2D(Collision2D transform)
     {
-        if (bruh.gameObject.CompareTag("Health"))
+        if (transform.gameObject.CompareTag("Health"))
         {
             health = health + 1;
 
-            Destroy(bruh.gameObject);
+            Destroy(transform.gameObject);
 
         }
-        if (bruh.gameObject.CompareTag("Ammo"))
+        if (transform.gameObject.CompareTag("Ammo"))
         {
             missiles = missiles + 3;
-            Destroy(bruh.gameObject);
+            Destroy(transform.gameObject);
 
         }
 
-        if (bruh.gameObject.CompareTag("Enemy"))
+        if (transform.gameObject.CompareTag("Enemy"))
         {
 
             health = health - 1;

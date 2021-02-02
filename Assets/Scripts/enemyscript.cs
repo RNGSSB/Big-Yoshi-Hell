@@ -11,6 +11,10 @@ public class enemyscript : MonoBehaviour
     public int chance;
     public Transform pos;
     public Transform spawn;
+    public bool moveTowards;
+    public float speed;
+    public Transform movePositon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +24,8 @@ public class enemyscript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = Vector3.MoveTowards(transform.position, movePositon.position, speed * Time.deltaTime);
+
         if (health <= 0)
         {
             if (RNG == chance)
@@ -39,6 +45,10 @@ public class enemyscript : MonoBehaviour
         Debug.Log("Took " + damage);
         FindObjectOfType<Hitlag>().Stop(hitlag);
         health -= damage;
+    }
+
+    public void MoveTowardsPoint(Vector3 position) 
+    {
     }
 
     IEnumerator WaitForSpawn()

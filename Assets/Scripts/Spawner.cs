@@ -9,6 +9,11 @@ public class Spawner : MonoBehaviour
     public float cooldown = 5f;
     public float initialspawntime = 5f;
     private float nextspawn;
+    public bool moveTowards;
+    public Transform movePosition;
+    static GameObject instance;
+    public bool hasSpawned;
+    List<GameObject> Spawned;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +29,11 @@ public class Spawner : MonoBehaviour
             if (Time.time > nextspawn)
             {
                 Instantiate(enemy, spawnpoint.position, spawnpoint.rotation);
+                Spawned.Add(enemy);
+                EnemyAI Enemy = enemy.GetComponent<EnemyAI>();
+                Enemy.position = movePosition;
                 nextspawn = Time.time + cooldown;
-
             }
-
-
         }
     }
 }

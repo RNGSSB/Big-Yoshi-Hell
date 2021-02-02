@@ -18,11 +18,13 @@ public class Projectiles : MonoBehaviour
     public bool left;
     private float hitlag;
     public float hitlagmul = 1;
+    int scorePerKill;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        scorePerKill = 10;
         rb = GetComponent<Rigidbody2D>();
         pos = GetComponent<Transform>();
         CheckDir(1f);
@@ -36,8 +38,6 @@ public class Projectiles : MonoBehaviour
         if (lifetime <= 0)
         {
             Destroy(gameObject);
-        
-
         }
     }
 
@@ -70,9 +70,22 @@ public class Projectiles : MonoBehaviour
                 hitlag *= 1.2f;
                 damage += 1;
                 CheckDir(1.2f);
+                FindObjectOfType<GameManager>().AddScore(scorePerKill);
+                scorePerKill += 10;
             }
-            else
+            else if(!KeepGoingAfterKill && enemy.health <= 0)
             {
+                FindObjectOfType<GameManager>().AddScore(10);
+                Destroy(gameObject);
+            }
+            else if (!KeepGoingAfterKill && enemy.health > 0) 
+            {
+                FindObjectOfType<GameManager>().AddScore(5);
+                Destroy(gameObject);
+            }
+            else if (KeepGoingAfterKill && enemy.health > 0) 
+            {
+                FindObjectOfType<GameManager>().AddScore(5);
                 Destroy(gameObject);
             }
         }

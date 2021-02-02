@@ -20,7 +20,7 @@ public class Item : MonoBehaviour
     {
         if (bruh.gameObject.CompareTag("Player"))
         {
-
+            FindObjectOfType<GameManager>().AddScore(5);
             Destroy(gameObject);
         }
 
